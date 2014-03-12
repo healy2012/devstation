@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="datares" namespace="/datares" extends="default">
+	
+		<action name="tablePageList" class="cn.emag.datares.web.action.TableAction">
+			<result>/datares/tablePageList.jsp</result>
+		</action>
+		<!-- 所有资源表配置展示 -->
+		<action name="allTableConfig" class="cn.emag.datares.web.action.TableAction" method="getAllTable">
+			<result>/datares/allTableConfig.jsp</result>
+		</action>
+		<!-- 物理表字段及关系配置 -->
+		<action name="dbTableConfig" class="cn.emag.datares.web.action.TableAction" method="getDbTableConfig">
+			<result>/datares/dbTableConfig.jsp</result>
+		</action>
+		<!-- 更新物理表字段及关系配置 -->
+		<action name="updateDbTableConfig" class="cn.emag.datares.web.action.TableAction" method="updateDbTableConfig">
+			<result>/datares/dbTableConfig.jsp</result>
+		</action>
+		<!-- 数据表展现相关配置 -->
+		<action name="tableDispConfig" class="cn.emag.datares.web.action.TableAction" method="getTableDispConfig">
+			<result>/datares/tableDispConfig.jsp</result>
+		</action>
+		<!-- 更新数据表展现相关配置 -->
+		<action name="updateTableDispConfig" class="cn.emag.datares.web.action.TableAction" method="updateTableDispConfig">
+			<result>/datares/tableDispConfig.jsp</result>
+		</action>
+
+		<action name="getColumnListById" class="cn.emag.datares.web.ajax.TableJsonAction" method="getColumnListById" />
+
+		<action name="updateTabModel" class="cn.emag.datares.web.action.TableAction"
+			method="update">
+			<result>/datares/editTableModel.jsp</result>
+		</action>
+
+		<action name="saveTabModel" class="cn.emag.datares.web.action.TableAction"
+			method="saveTabModel">
+			<result name="errorPage">/datares/editTableModel.jsp</result>
+			<result name="success">/datares/editTableModelDisp.jsp</result>
+		</action>
+
+		<action name="saveTabModelDisp" class="cn.emag.datares.web.action.TableAction"
+			method="saveTabModelDisp">
+			<result name="errorPage">/datares/editTableModelDisp.jsp</result>
+			<result type="redirectAction" name="success">tablePageList</result>
+		</action>
+
+		<action name="addTable">
+			<result>/datares/addTable.jsp</result>
+		</action>
+
+		<action name="saveTable" class="cn.emag.datares.web.action.TableAction"
+			method="saveTable">
+			<result name="success">/datares/editTableModel.jsp</result>
+			<result name="errorPage">/datares/addTable.jsp</result>
+		</action>
+
+		<action name="updateTable" class="cn.emag.datares.web.action.TableAction"
+			method="updateTable">
+			<result name="success">/datares/editTableModel.jsp</result>
+			<result type="redirectAction" name="errorPage">tablePageList</result>
+		</action>
+		
+		<action name="deleteTable" class="cn.emag.datares.web.action.TableAction"
+			method="deleteTable">
+			<result type="redirectAction" name="success">tablePageList</result>
+		</action>
+		<!-- table列表数据展示 -->
+		<action name="dynamicTableList" class="cn.emag.datares.web.action.TableDisplayAction"
+			method="dynamicTabPaginator">
+			<result>/datares/dynamicTableList.jsp</result>
+		</action>
+		<!-- table列表数据批量修改 -->
+		<action name="dynamicTableListForBatchEdit" class="cn.emag.datares.web.action.TableDisplayAction"
+			method="dynamicTabPaginatorForBatchEdit">
+			<result>/datares/dynamicTableListForBatchEdit.jsp</result>
+		</action>
+		
+		<action name="batchEditCommit" class="cn.emag.datares.web.action.TableDisplayAction"
+			method="batchEditCommit">
+			<result>/datares/dynamicTableListForBatchEdit.jsp</result>
+		</action>
+
+		<action name="dynamicTabForm" class="cn.emag.datares.web.action.TableDisplayAction"
+			method="dynamicTabForm">
+			<result name="success">/datares/dynamicTableForm.jsp</result>
+			<result type="redirectAction" name="deleteSuccess">
+				<param name="actionName">dynamicTableList</param>  
+	        	<param name="tab_id">${tab_id}</param>
+			</result>
+		</action>
+
+		<action name="validateUser" class="cn.emag.demo.web.action.PortalRemoteValAction"
+			method="validateUser">
+			<result type="stream">
+				<param name="contentType">text/html</param><!-- 默认为text/plain -->
+				<param name="inputName">inputStream</param><!-- 默认就为inputStream -->
+			</result>
+		</action>
+	</package>
+</struts>

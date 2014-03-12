@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="cn.emag.system.domain.BaseData">
+	<typeAlias alias="baseData" type="cn.emag.system.domain.BaseData" />
+	<cacheModel id="categoryCache" type="LRU" readOnly="true"
+		serialize="true">
+		<flushInterval hours="24" />
+		<property name="size" value="1000" />
+	</cacheModel>
+
+	<insert id="save" parameterClass="baseData">
+		insert into sys_base_data(bd_lvl,bd_name,bd_flag,bd_value,bd_value_1,bd_value_2,bd_parent_id,bd_code) 
+		values(#bdLvl#,#bdName#,#bdFlag#,#bdValue#,#bdValue_1#,#bdValue_2#,#bdParentId#,#bdCode#)	
+		<selectKey resultClass="Integer" keyProperty="bdId">  
+	        select last_insert_id()
+    	</selectKey> 
+	</insert>	
+	
+	<update id="update" parameterClass="baseData">
+		update sys_base_data set bd_name=#bdName#,bd_flag=#bdFlag#,
+			bd_value=#bdValue#,bd_value_1=#bdValue_1#,bd_value_2=#bdValue_2#,bd_parent_id=#bdParentId#
+			where bd_id=#bdId#
+	</update>
+	
+	<delete id="delete" parameterClass="Integer">
+		delete from sys_base_data where bd_id=#id#
+	</delete>
+	
+	<select id="findById" parameterClass="Integer" resultClass="baseData">
+		select bd_id as bdId,bd_lvl as bdLvl,bd_name as bdName,bd_flag as bdFlag,
+			bd_value as bdValue,bd_value_1 as bdValue_1,bd_value_2 as bdValue_2,bd_parent_id as bdParentId,
+			bd_code as bdCode
+		from sys_base_data where bd_id=#bdId#
+	</select>
+	
+	<select id="findChildById" parameterClass="Integer" resultClass="baseData">
+		select bd_id as bdId,bd_lvl as bdLvl,bd_name as bdName,bd_flag as bdFlag,
+			bd_value as bdValue,bd_value_1 as bdValue_1,bd_value_2 as bdValue_2,bd_parent_id as bdParentId,
+			bd_code as bdCode
+		from sys_base_data where bd_parent_id=#id#
+	</select>
+	
+	<select id="listAll" parameterClass="Integer" resultClass="baseData">
+		select bd_id as bdId,bd_lvl as bdLvl,bd_name as bdName,bd_flag as bdFlag,
+			bd_value as bdValue,bd_value_1 as bdValue_1,bd_value_2 as bdValue_2,bd_parent_id as bdParentId,
+			bd_code as bdCode
+		from sys_base_data 
+	</select>
+	
+	<select id="listBaseParent" resultClass="baseData">
+		select bd_id as bdId,bd_lvl as bdLvl,bd_name as bdName,bd_flag as bdFlag,
+			bd_value as bdValue,bd_value_1 as bdValue_1,bd_value_2 as bdValue_2,bd_parent_id as bdParentId,
+			bd_code as bdCode
+		from sys_base_data 
+	</select>
+	
+	<select id="checkFlag" parameterClass="String" resultClass="String">
+		select max(bd_flag) from sys_base_data where bd_flag = #cd#
+	</select>
+	
+	<select id="findChildsByFlag" resultClass="baseData" parameterClass="baseData">
+		select bd_id as bdId,bd_lvl as bdLvl,bd_name as bdName,bd_flag as bdFlag,
+			bd_value as bdValue,bd_value_1 as bdValue_1,bd_value_2 as bdValue_2,bd_parent_id as bdParentId,
+			bd_code as bdCode
+		from sys_base_data where 1=1
+		<isNotNull property="bdFlag" prepend="and">
+			bd_parent_id=(select bd_id from sys_base_data sb where sb.bd_flag=#bdFlag# )
+		</isNotNull>
+		<isNotNull property="bdName" prepend="and">
+			bd_name like '%#bdName#%'
+		</isNotNull>
+	</select>
+	<!-- 根据flag 找到所有子节点 -->
+	<select id="findAllChildsByFlag" resultClass="baseData" parameterClass="baseData">
+		select bd_id as bdId,bd_lvl as bdLvl,bd_name as bdName,bd_flag as bdFlag,
+			bd_value as bdValue,bd_value_1 as bdValue_1,bd_value_2 as bdValue_2,bd_parent_id as bdParentId,
+			bd_code as bdCode
+		from sys_base_data where 1=1
+		<isNotNull property="bdFlag" prepend="and">
+			bd_code like (select bd_code from sys_base_data sb where sb.bd_flag=#bdFlag#)||'____%'
+		</isNotNull>
+		<isNotNull property="bdName" prepend="and">
+			bd_name like '%'||#bdName#||'%'
+		</isNotNull>
+	</select>
+	
+	<select id="findChildMaxCode" resultClass="String">
+		select max(bd_code) from sys_base_data where bd_code like #pcode#
+	</select>
+	
+	<select id="findAllChildCode" resultClass="String" parameterClass="String">
+		select substr(bd_code,length(#pcode#)+1,4) from sys_base_data t where bd_code like #pcode#||'____' order by bd_code asc
+	</select>
+	
+	<select id="findDataWithChild" resultClass="baseData">
+		select bd_id as bdId,bd_lvl as bdLvl,bd_name as bdName,bd_flag as bdFlag,
+			bd_value as bdValue,bd_value_1 as bdValue_1,bd_value_2 as bdValue_2,bd_parent_id as bdParentId,
+			bd_code as bdCode
+		from sys_base_data where bd_id in (select bd_parent_id from sys_base_data)
+	</select>
+</sqlMap>
+

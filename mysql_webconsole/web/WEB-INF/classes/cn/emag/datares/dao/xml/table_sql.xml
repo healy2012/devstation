@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="cn.emag.datares.TableModel">
+
+	<typeAlias alias="TableAlias"
+		type="cn.emag.datares.domain.Table" />
+		
+	<typeAlias alias="ColumnAlias"
+		type="cn.emag.datares.domain.Column" />
+		
+	<typeAlias alias="TableDispAlias"
+		type="cn.emag.datares.domain.TableDisp" />
+		
+	<typeAlias alias="ColumnDispAlias"
+		type="cn.emag.datares.domain.ColumnDisp" />
+	
+	<typeAlias alias="ColumnVerifyAlias"
+		type="cn.emag.datares.domain.ColumnVerify" />
+
+	<resultMap id="Table" class="TableAlias">
+		<result property="tab_id" column="tab_id" />
+		<result property="tab_name" column="tab_name" />
+		<result property="tab_sqlname" column="tab_sqlname" />
+		<result property="create_time" column="create_time" />
+		<result property="update_time" column="update_time" />
+	</resultMap>
+	
+	<resultMap id="Column" class="ColumnAlias">
+		<result property="tab_id" column="tab_id" />
+		<result property="col_sqlname" column="col_sqlname" />
+		<result property="col_sqltype" column="col_sqltype" />
+		<result property="col_size" column="col_size" />
+		<result property="col_desc" column="col_desc" />
+		<result property="isnullable" column="isnullable" />
+		<result property="ispk" column="ispk" />
+		<result property="datadict" column="datadict" />
+		<result property="sub_tab_id" column="sub_tab_id" />
+		<result property="sub_tab_col_sqlname" column="sub_tab_col_sqlname" />
+		<result property="validation_type" column="validation_type" />
+		<result property="create_time" column="create_time" />
+		<result property="update_time" column="update_time" />		
+	</resultMap>
+	
+	<resultMap id="TableDisp" class="TableDispAlias">
+		<result property="tab_disp_id" column="tab_disp_id" />
+		<result property="tab_id" column="tab_id" />
+		<result property="page_count" column="page_count" />
+		<result property="support_query" column="support_query" />
+		<result property="support_new" column="support_new" />
+		<result property="support_del" column="support_del" />
+		<result property="support_update" column="support_update" />
+		<result property="support_sort" column="support_sort" />
+		<result property="support_export" column="support_export" />
+		<result property="layout_type" column="layout_type" />
+		<result property="create_time" column="create_time" />
+		<result property="update_time" column="update_time" />		
+	</resultMap>
+	
+	<resultMap id="ColumnDisp" class="ColumnDispAlias">
+		<result property="tab_disp_id" column="tab_disp_id" />
+		<result property="full_col_sqlname" column="full_col_sqlname" />
+		<result property="is_in_list" column="is_in_list" />
+		<result property="list_disp_name" column="list_disp_name" />
+		<result property="support_sort" column="support_sort" />
+		<result property="support_query" column="support_query" />
+		<result property="list_disp_order" column="list_disp_order" />
+		<result property="is_in_form" column="is_in_form" />
+		<result property="form_disp_name" column="form_disp_name" />
+		<result property="support_update" column="support_update" />
+		<result property="form_disp_type" column="form_disp_type" />
+		<result property="sub_tab_disp_cols" column="sub_tab_disp_cols" />
+		<result property="form_disp_order" column="form_disp_order" />
+		<result property="create_time" column="create_time" />
+		<result property="update_time" column="update_time" />		
+	</resultMap>
+	
+	<resultMap id="ColumnVerify" class="ColumnVerifyAlias">
+		<result property="validation_type" column="validation_type" />
+		<result property="regular_exp" column="regular_exp" />
+		<result property="message" column="message" />
+		<result property="validation_desc" column="validation_desc" />
+		<result property="create_time" column="create_time" />
+		<result property="update_time" column="update_time" />	
+	</resultMap>
+	
+	<insert id="saveUserInfo" parameterClass="UserInfoAlias">
+		insert into portaluserinfo
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="userId">USERID</isNotNull>
+			<isNotNull prepend="," property="userName">
+				USERNAME
+			</isNotNull>
+			<isNotNull prepend="," property="password">
+				PASSWORD
+			</isNotNull>
+			<isNotNull prepend="," property="email">EMAIL</isNotNull>
+			<isNotNull prepend="," property="tel">TEL</isNotNull>
+			<isNotNull prepend="," property="name">NAME</isNotNull>
+		</dynamic>
+		) values
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="userId">
+				#userId#
+			</isNotNull>
+			<isNotNull prepend="," property="userName">
+				#userName#
+			</isNotNull>
+			<isNotNull prepend="," property="password">
+				#password#
+			</isNotNull>
+			<isNotNull prepend="," property="email">#email#</isNotNull>
+			<isNotNull prepend="," property="tel">#tel#</isNotNull>
+			<isNotNull prepend="," property="name">#name#</isNotNull>
+		</dynamic>
+		)
+	</insert>
+
+	<select id="queryUserList" parameterClass="java.util.HashMap"
+		resultMap="UserInfo">
+		select * from portaluserinfo
+		<dynamic prepend="WHERE">
+			<isNotNull property="userId">
+			    USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userName">
+				USERNAME like '%$userName$%'
+			</isNotNull>
+			<isNotNull prepend="AND" property="password">
+				PASSWORD = #password#
+			</isNotNull>
+			<isNotNull prepend="AND" property="email">
+				EMAIL = #email#
+			</isNotNull>
+			<isNotNull prepend="AND" property="tel">
+				TEL = #tel#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+
+		</dynamic>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty prepend="ORDER BY"
+				property="orderByColumnSql">
+				$orderByColumnSql$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<!-- <select id="queryUserForPage" parameterClass="java.util.HashMap" resultMap="UserInfo">
+		select * from portaluserinfo 
+		<dynamic prepend="WHERE">
+		<isNotNull property="userId">
+		USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userName">
+		USERNAME = #userName#
+		</isNotNull>
+		<isNotNull prepend="AND" property="password">
+		PASSWORD = #password#
+		</isNotNull>
+		<isNotNull prepend="AND" property="email">
+		EMAIL = #email#
+		</isNotNull>
+		<isNotNull prepend="AND" property="tel">
+		TEL = #tel#
+		</isNotNull>  
+		<isNotNull prepend="AND" property="name">
+		NAME = #name#
+		</isNotNull> 
+		<isNotNull prepend="ORDER BY" property="orderByColumnSql">
+		$orderByColumnSql$
+		</isNotNull>         
+		</dynamic>  
+		</select> -->
+
+	<select id="queryUserCount" resultClass="Integer">
+		select count(1) from portaluserinfo
+		<dynamic prepend="WHERE">
+			<isNotNull property="userId">USERID = #userId#</isNotNull>
+			<isNotNull prepend="AND" property="userName">
+				USERNAME like '%$userName$%'
+			</isNotNull>
+			<isNotNull prepend="AND" property="password">
+				PASSWORD = #password#
+			</isNotNull>
+			<isNotNull prepend="AND" property="email">
+				EMAIL = #email#
+			</isNotNull>
+			<isNotNull prepend="AND" property="tel">
+				TEL = #tel#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<delete id="delUser" parameterClass="UserInfoAlias">
+		delete from portaluserinfo
+		<dynamic prepend="WHERE">
+			<isNotNull property="userId">USERID = #userId#</isNotNull>
+			<isNotNull prepend="AND" property="userName">
+				USERNAME = #userName#
+			</isNotNull>
+			<isNotNull prepend="AND" property="password">
+				PASSWORD = #password#
+			</isNotNull>
+			<isNotNull prepend="AND" property="email">
+				EMAIL = #email#
+			</isNotNull>
+			<isNotNull prepend="AND" property="tel">
+				TEL = #tel#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+		</dynamic>
+	</delete>
+
+	<update id="updateUser" parameterClass="UserInfoAlias">
+		<![CDATA[update portaluserinfo set USERNAME=#userName#,PASSWORD=#password#,EMAIL=#email#,TEL=#tel#,NAME=#name# where USERID = #userId#]]>
+	</update>
+
+</sqlMap>

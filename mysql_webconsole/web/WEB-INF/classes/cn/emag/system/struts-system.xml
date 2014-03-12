@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="system" namespace="/system" extends="default">
+		
+		<action name="main">
+			<result>/system/systemMain.jsp</result>
+		</action>
+		
+		<action name="manageSystemMenu">
+			<result>/system/manageSystemMenu.jsp</result>
+		</action>
+		
+		<action name="getSystemMenu" class="cn.emag.system.web.action.ManageMenuAction"
+			method="getSystemMenu">
+			<result>/system/editMenu.jsp</result>
+		</action>
+		
+		<action name="updateMenu" class="cn.emag.system.web.action.ManageMenuAction"
+			method="updateMenu">
+			<result>/system/editMenu.jsp</result>
+		</action>
+		
+		<action name="toAdd">
+			<result>/system/addMenu.jsp</result>
+		</action>
+		
+		<action name="systemAjax" class="cn.emag.system.web.ajax.SystemAjaxAction" />
+		
+		 <action name="queryNavigatorList" class="cn.emag.system.web.action.ManageNavigatorAction" method="queryNavigatorList">
+			<result>/system/queryNavigatorList.jsp</result>
+		</action>
+		
+		<action name="addNavigator" class="cn.emag.system.web.action.ManageNavigatorAction" method="addNavigator">
+			<result>/system/createNavigator.jsp</result>
+		</action>
+	    
+	    <action name="createNavigator" 
+	           class="cn.emag.system.web.action.ManageNavigatorAction" 
+	           method="createNavigator">
+	        	<result type="redirectAction">queryNavigatorList</result>
+		</action>
+		
+		<action name="delNavgators" class="cn.emag.system.web.action.ManageNavigatorAction" method="delNavgators">
+			   <result type="redirectAction">queryNavigatorList</result>
+		</action>
+		
+		<action name="updateNavigator" class="cn.emag.system.web.action.ManageNavigatorAction" method="updateNavigator">
+			<result>/system/updateNavigator.jsp</result>
+		</action>
+		
+		<action name="updateSaveNavigator" class="cn.emag.system.web.action.ManageNavigatorAction" method="updateSaveNavigator">
+			 <result type="redirectAction">queryNavigatorList</result>
+		</action>
+		
+		<action name="remoteValidateSeq" class="cn.emag.system.web.action.ManageNavigatorAction" method="remoteValidateSeq">
+			<result type="stream">
+				<param name="contentType">text/html</param><!-- 默认为text/plain -->
+				<param name="inputName">inputStream</param><!-- 默认就为inputStream -->
+			</result>
+			<result name="input">
+			  /system/updateNavigator.jsp
+			</result>
+		</action>
+		
+		<!-- baseData raodun start-->
+		<action name="manageBaseData">
+			<result>/system/manageBaseData.jsp</result>
+		</action>
+		<action name="toAddBd" class="cn.emag.system.web.action.BaseDataAction" method="toAddBd">
+			<result>/system/addBaseData.jsp</result>
+		</action>
+		
+		<action name="doAddBd" class="cn.emag.system.web.action.BaseDataAction" method="doAddBd">
+			<result type="redirect">/system/manageBaseData.action?bdId=${bdId}</result>
+		</action>
+		
+		<action name="toEditBd" class="cn.emag.system.web.action.BaseDataAction" method="toEditBd">
+			<result>/system/editBaseData.jsp</result>
+		</action>
+		
+		<action name="doEditBd" class="cn.emag.system.web.action.BaseDataAction" method="doEditBd">
+			<result type="redirect">/system/toEditBd.action?bdId=${bdId}</result>
+		</action>
+		
+		<action name="doDelBd" class="cn.emag.system.web.action.BaseDataAction" method="doDelBd">
+			<result type="redirect">/</result>
+		</action>
+		
+		<action name="checkFlag" class="cn.emag.system.web.action.BaseDataAction" method="checkFlag">
+			
+		</action>
+		
+		<action name="getListByFlag" class="cn.emag.system.web.ajax.BaseDataAjaxAction" method="getListByFlag">
+			
+		</action>
+		
+		<action name="getListAllByFlag" class="cn.emag.system.web.ajax.BaseDataAjaxAction" method="getListAllByFlag">
+			
+		</action>
+		<!-- baseData raodun end-->
+  </package>
+</struts>

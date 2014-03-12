@@ -1,0 +1,47 @@
+@charset "utf-8";
+html,body  {
+  overflow:auto;
+  overflow-x:hidden;
+}
+body { background:#fff url(../images/uip_03.jpg) repeat-x 0 0;}
+
+/*============================== 内容部分 =========================================*/
+.content{
+  margin:0 auto;
+  border-top:1px solid #fff;
+  color:#535353;
+}
+
+/* 首页 style */
+.box_welcome { background:url(../images/bg_welcome.jpg) no-repeat right bottom;}
+h1.text {
+  background:url(../images/img_welcome.gif) no-repeat left top;
+  width:795px;
+  height:168px;
+  margin-left:40px;
+}
+h1.text span { display:none;}
+h2.foot {
+  height:425px;
+  background:url(../images/bg_welcome_left.jpg) no-repeat left bottom;
+}
+
+/* 面包屑导航 style */
+h3.breadcrumb {
+  background:url(../images/uoo_03.jpg) repeat-x 0 -142px;
+  width:100%;
+  height:25px;
+  line-height:25px;
+  border:1px solid #8fb9d0;
+  font-weight:normal;
+  margin:15px auto 0 auto;
+}
+h3.breadcrumb .current {
+  background:url(../images/icon25.gif) no-repeat 5px -100px;
+  height:25px;
+  padding:5px 0 5px 35px;
+}
+h3.breadcrumb a { padding:0 5px;}
+h3.breadcrumb .a { padding-right:5px;}
+
+.systemClass{ font-size:12px; font-weight:normal; width:100%; height:45px; line-height:45px; overflow:hidden;}

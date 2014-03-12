@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.CtabColumnVerify" class="cn.emag.datares.domain.ColumnVerify">
+        <result property="validation_type" column="validation_type"/>
+        <result property="regular_exp" column="regular_exp"/>
+        <result property="message" column="message"/>
+        <result property="validation_desc" column="validation_desc"/>
+        <result property="create_time" column="create_time"/>
+        <result property="update_time" column="update_time"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="CtabColumnVerify.columns">
+	    <![CDATA[
+        validation_type ,regular_exp ,message ,validation_desc ,create_time ,update_time 
+	    ]]>
+	</sql>
+	
+    <insert id="CtabColumnVerify.insert" >
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+     <selectKey resultClass="java.lang.Integer" type="post" keyProperty="validation_type" >
+            select last_insert_id()
+        </selectKey>
+        INSERT INTO c_tab_column_verify (
+	        validation_type
+        	<isNotNull prepend="," property="regular_exp">regular_exp</isNotNull>
+        	<isNotNull prepend="," property="message">message</isNotNull>
+        	<isNotNull prepend="," property="validation_desc">validation_desc</isNotNull>
+        	<isNotNull prepend="," property="create_time">create_time</isNotNull>
+        	<isNotNull prepend="," property="update_time">update_time</isNotNull>
+        ) VALUES (
+	       #validation_type#
+        	<isNotNull prepend="," property="regular_exp">#regular_exp#</isNotNull>
+        	<isNotNull prepend="," property="message">#message#</isNotNull>
+        	<isNotNull prepend="," property="validation_desc">#validation_desc#</isNotNull>
+        	<isNotNull prepend="," property="create_time">#create_time#</isNotNull>
+        	<isNotNull prepend="," property="update_time">#update_time#</isNotNull>
+        )
+    </insert>
+
+    <update id="CtabColumnVerify.update" >
+        UPDATE c_tab_column_verify SET
+	        validation_type = validation_type
+	        <isNotNull prepend="," property="regular_exp">regular_exp = #regular_exp#</isNotNull>
+	        <isNotNull prepend="," property="message">message = #message#</isNotNull>
+	        <isNotNull prepend="," property="validation_desc">validation_desc = #validation_desc#</isNotNull>
+	        <isNotNull prepend="," property="create_time">create_time = #create_time#</isNotNull>
+	        <isNotNull prepend="," property="update_time">update_time = #update_time#</isNotNull>
+        WHERE 
+    <![CDATA[
+	        validation_type = #validation_type# 
+    ]]>
+    </update>
+
+    <delete id="CtabColumnVerify.delete">
+    <![CDATA[
+        DELETE FROM c_tab_column_verify WHERE
+        validation_type = #validation_type# 
+    ]]>
+    </delete>
+    
+    <select id="CtabColumnVerify.getById" resultMap="RM.CtabColumnVerify">
+	    SELECT <include refid="CtabColumnVerify.columns"/>
+	    <![CDATA[
+	        FROM c_tab_column_verify 
+	        WHERE 
+		        validation_type = #validation_type# 
+	    ]]>
+    </select>
+
+	<sql id="CtabColumnVerify.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="validation_type">
+		             validation_type = #validation_type#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="regular_exp">
+		             regular_exp = #regular_exp#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="message">
+		             message = #message#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="validation_desc">
+		             validation_desc = #validation_desc#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTimeBegin">
+		             create_time >= #createTimeBegin#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTimeEnd">
+		             create_time &lt;= #createTimeEnd#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updateTimeBegin">
+		             update_time >= #updateTimeBegin#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updateTimeEnd">
+		             update_time &lt;= #updateTimeEnd#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="CtabColumnVerify.findPage.count" resultClass="long">
+        SELECT count(*) FROM c_tab_column_verify <include refid="CtabColumnVerify.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="CtabColumnVerify.findPage" resultMap="RM.CtabColumnVerify">
+    	SELECT <include refid="CtabColumnVerify.columns"/> FROM c_tab_column_verify 
+		<include refid="CtabColumnVerify.findPage.where"/>
+		limit 
+		     #pageStart#,#pageEnd#
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+    
+    <select id="CtabColumnVerify.queryTableColumnVerifyList" resultMap="RM.CtabColumnVerify">
+    	SELECT <include refid="CtabColumnVerify.columns"/> FROM c_tab_column_verify 
+		<include refid="CtabColumnVerify.findPage.where"/>
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+
+	
+</sqlMap>
+

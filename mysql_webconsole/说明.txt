@@ -1,0 +1,3 @@
+运行generator/src下的GeneratorMain类即可生成增删查改功能
+运行前请填写配置信息
+配置信息主要在GeneratorMain类中和generator.xml

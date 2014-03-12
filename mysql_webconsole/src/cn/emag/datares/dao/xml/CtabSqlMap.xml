@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.Ctab" class="cn.emag.datares.domain.Table">
+        <result property="tab_id" column="tab_id"/>
+        <result property="tab_name" column="tab_name"/>
+        <result property="tab_sqlname" column="tab_sqlname"/>
+        <result property="create_time" column="create_time"/>
+        <result property="update_time" column="update_time"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Ctab.columns">
+	    <![CDATA[
+        tab_id ,tab_name ,tab_sqlname ,create_time ,update_time 
+	    ]]>
+	</sql>
+	
+    <insert id="Ctab.insert">
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    --> 
+     
+        INSERT INTO c_tab (
+        	tab_name
+        	<isNotNull prepend="," property="tab_sqlname">tab_sqlname</isNotNull>
+        	<isNotNull prepend="," property="create_time">create_time</isNotNull>
+        	<isNotNull prepend="," property="update_time">update_time</isNotNull>
+        ) VALUES (
+        	#tab_name#
+        	<isNotNull prepend="," property="tab_sqlname">#tab_sqlname#</isNotNull>
+        	<isNotNull prepend="," property="create_time">#create_time#</isNotNull>
+        	<isNotNull prepend="," property="update_time">#update_time#</isNotNull>
+        )
+        
+        <selectKey resultClass="java.lang.String" type="post" keyProperty="tab_id" >
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="Ctab.update" >
+        UPDATE c_tab SET
+	        tab_id = tab_id
+	        <isNotNull prepend="," property="tab_name">tab_name = #tab_name#</isNotNull>
+	        <isNotNull prepend="," property="tab_sqlname">tab_sqlname = #tab_sqlname#</isNotNull>
+	        <isNotNull prepend="," property="create_time">create_time = #create_time#</isNotNull>
+	        <isNotNull prepend="," property="update_time">update_time = #update_time#</isNotNull>
+        WHERE 
+    <![CDATA[
+	        tab_id = #tab_id# 
+    ]]>
+    </update>
+
+    <delete id="Ctab.delete">
+    <![CDATA[
+        DELETE FROM c_tab WHERE
+        tab_id = #tab_id# 
+    ]]>
+    </delete>
+    
+    <delete id="Ctab.deleteMultiple">
+    <![CDATA[
+        DELETE FROM c_tab WHERE
+        tab_id in ($tab_id$) 
+    ]]>
+    </delete>
+    
+    <select id="Ctab.getById" resultMap="RM.Ctab">
+	    SELECT <include refid="Ctab.columns"/>
+	    <![CDATA[
+	        FROM c_tab 
+	        WHERE 
+		        tab_id = #tab_id# 
+	    ]]>
+    </select>
+
+	<sql id="Ctab.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="tab_id">
+		             tab_id = #tab_id#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="tab_name">
+		             tab_name = #tab_name#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="tab_sqlname">
+		             tab_sqlname = #tab_sqlname#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="Ctab.findPage.count" resultClass="long">
+        SELECT count(*) FROM c_tab <include refid="Ctab.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="Ctab.findPage" resultMap="RM.Ctab">
+    	SELECT <include refid="Ctab.columns"/> FROM c_tab 
+		<include refid="Ctab.findPage.where"/>
+		limit 
+		     #pageStart#,#pageEnd#
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+    
+    <select id="Ctab.queryTableList" resultMap="RM.Ctab">
+    	SELECT <include refid="Ctab.columns"/> FROM c_tab 
+		<include refid="Ctab.findPage.where"/>
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+    
+    <select id="Ctab.existTableByName" resultClass="String">
+    	select table_name from INFORMATION_SCHEMA.TABLES 
+    	where TABLE_SCHEMA=#dbname# and TABLE_NAME= #tbname#
+    </select>
+    
+    <select id="Ctab.queryTableListByPage" parameterClass="java.util.HashMap"
+		resultMap="RM.Ctab">
+		SELECT <include refid="Ctab.columns"/> FROM c_tab 
+		<include refid="Ctab.findPage.where"/>
+		
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty prepend="ORDER BY"
+				property="orderByColumnSql">
+				$orderByColumnSql$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="Ctab.getTableCount" resultClass="Integer">
+		select count(1) from c_tab
+		<include refid="Ctab.findPage.where"/>
+	</select>
+
+	
+</sqlMap>
+

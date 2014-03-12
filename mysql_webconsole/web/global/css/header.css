@@ -1,0 +1,121 @@
+@charset "utf-8";
+/* CSS Document */
+
+body { background:url(../images/bg_repeatx.gif) repeat-x 0 0;}
+
+.header_left {
+  float:left;
+  width:600px;
+  height:99px;
+  background:url(../images/img_tit.gif) no-repeat left 0;
+}
+.header_right {
+  float:right;
+  width:395px;
+  height:99px;
+  background:url(../images/bg_head_right.gif) no-repeat left 0;
+}
+
+/* topnav style */
+.header_right ul {
+	margin-right:10px;
+	margin-top:20px;
+  width:455px;
+  float:right;
+}
+.header_right ul li {  
+  float:right;
+  padding:20px 15px 0 0;
+  width:98px;
+  height:27px;
+}
+
+#wsj_tuichu{float:right;
+  padding:20px 15px 0 0;
+  width:68px;
+  height:27px;}
+  
+.header_right ul li a.home, .header_right ul li a.quit, .header_right ul li a.help, .header_right ul li a.password,
+.header_right ul li a.home:hover, .header_right ul li a.quit:hover, .header_right ul li a.help:hover, .header_right ul li a.password:hover {
+  background-position:0 0;
+  background-repeat:no-repeat;
+  width:99px;
+  height:51px;
+  display:inline-block;
+  cursor:pointer;
+}
+.header_right ul li a.quit {width:68px;
+  background-image:url(../images/btn_exit.png);
+  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src="images/btn_exit.png");/* only ie6 src 是指加载滤镜的页面相对于图片的路径。*/
+  _background-image:none;/* only ie6 */
+}
+.header_right ul li a.home {width:99px; margin-right:10px;
+  background-image:url(../images/btn_home.png);
+  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src="images/btn_home.png");/* only ie6 src 是指加载滤镜的页面相对于图片的路径。*/
+  _background-image:none;/* only ie6 */
+}
+.header_right ul li a.help { 
+  background-image:url(../images/btn_help.png);
+  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src="images/btn_help.png");/* only ie6 src 是指加载滤镜的页面相对于图片的路径。*/
+  _background-image:none;/* only ie6 */
+}
+.header_right ul li a.password { width:98px;
+  background-image:url(../images/btn_password.png);
+  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src="images/btn_password.png");/* only ie6 src 是指加载滤镜的页面相对于图片的路径。*/
+  _background-image:none;/* only ie6 */}
+
+.header_right ul li a.help:hover { 
+  background-image:url(../images/btn_help_hover.png);
+  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src="images/btn_help_hover.png");/* only ie6 src 是指加载滤镜的页面相对于图片的路径。*/
+  _background-image:none;/* only ie6 */
+}
+
+
+/* Login Information style */
+.header_nav {
+  clear:both;
+  padding-right:10px;
+  background:url(../images/bg_repeatx.gif) repeat-x 0 -99px;
+  height:49px;
+  line-height:49px;
+  text-align:right;
+  font-weight:bold;
+  color:#013f82;
+}
+
+
+.header_nav table{
+  clear:both;
+  padding-right:10px;
+  height:28px;
+  line-height:28px;
+  border-top:0px solid #3e96f6;
+  border-bottom:0px solid #3e96f6;
+  float:left;
+  font-weight:bold;
+  color:#0078ff;
+  padding:7px 10px 3px 25px;
+}
+
+.header_nav table td{
+  clear:both;
+  padding-right:10px;
+  height:28px;
+  line-height:28px;
+  border-top:1px solid #3e96f6;
+  border-bottom:1px solid #3e96f6;
+  float:center;
+  font-weight:bold;
+  border-top:0px solid #3e96f6;
+  border-bottom:0px solid #3e96f6;
+  color:#0078ff;
+  padding:0px 10px 3px 25px;
+}
+
+.header_nav span {
+  background:url(../images/icon25.gif) no-repeat left -75px;
+  height:25px;
+  padding:7px 10px 3px 25px;
+  color:#0078ff;
+}
+

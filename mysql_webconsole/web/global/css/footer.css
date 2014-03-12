@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+p.footer {
+  height:25px; line-height:25px;
+  background:url(../images/sciop_06.jpg) top repeat-x;
+  font-weight:bold;
+  color:#fff;
+  text-align:center;
+  font-family:Tahoma, Geneva, sans-serif;
+ 
+}
+p.footer span { display:none;}
+

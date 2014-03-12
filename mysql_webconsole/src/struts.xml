@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<!-- 
+修改说明:
+	1.修改pakcage的namespace属性,因为URL访问规则是: /namesapce/Entity/method.do 
+	2.根据你的包结构修改action节点的class属性 
+ -->
+ 
+<struts>
+	<include file="default.xml" />
+	
+	<include file="cn/emag/demo/struts-demo.xml" />
+	
+	<include file="cn/emag/global/struts-global.xml" />
+	
+	<include file="cn/emag/system/struts-system.xml" />
+	
+	<include file="cn/emag/datares/struts-datares.xml" />
+	
+    <constant name="struts.devMode" value="false" />
+    <!-- struts的URL扩展名 -->
+ 	
+ 	
+ 	<!-- 允许访问静态成员变量 -->
+ 	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+ 	
+    <constant name="struts.custom.i18n.resources" value="i18n/messages"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.enable.SlashesInActionNames" value="true" />
+
+	
+  	
+  	<!-- 修改为你自己的namespace 若有多个包，请添加多个package-->
+  
+    <package name="none" namespace="/pages" extends="default">
+		
+		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
+		<action name="*/*" method="{2}" class="com.emag.rao.action.{1}Action" >
+		    <result name="success" >{2}.jsp</result>
+		    <result name="to_list" type="redirect">{1}/list.do</result>
+		</action>
+					
+    </package>
+    
+</struts>

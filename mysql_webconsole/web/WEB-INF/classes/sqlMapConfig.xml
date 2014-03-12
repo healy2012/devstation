@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings
+		cacheModelsEnabled="true"
+		enhancementEnabled="true"
+		lazyLoadingEnabled="true"
+		useStatementNamespaces="true"
+	/>
+	<sqlMap resource="cn/emag/demo/dao/xml/Message.xml"/>
+    <sqlMap resource="cn/emag/demo/dao/xml/portal_sql.xml"/>
+	<sqlMap resource="cn/emag/system/dao/xml/BaseDataXML.xml"/>
+	
+	<sqlMap resource="cn/emag/datares/dao/xml/CtabColumnDispSqlMap.xml"/>
+	<sqlMap resource="cn/emag/datares/dao/xml/CtabColumnSqlMap.xml"/>
+	<sqlMap resource="cn/emag/datares/dao/xml/CtabColumnVerifySqlMap.xml"/>
+	<sqlMap resource="cn/emag/datares/dao/xml/CtabDispSqlMap.xml"/>
+	<sqlMap resource="cn/emag/datares/dao/xml/CtabSqlMap.xml"/>
+</sqlMapConfig>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="cn.emag.system.domain.SystemPO">
+	<typeAlias alias="systempo" type="cn.emag.system.domain.SystemPO" />
+	<cacheModel id="categoryCache" type="LRU" readOnly="true"
+		serialize="true">
+		<flushInterval hours="24" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	<select id="querySystemListByPage" parameterClass="java.util.HashMap"
+		resultClass="systempo" cacheModel="categoryCache">
+		select system_id as systemId,
+       system_name as systemName,
+       system_desc as systemDesc,
+       valid as valid,
+       login_url as loginUrl,
+       last_update as lastUpdate
+      	from t_cams_system
+		<dynamic prepend="WHERE">
+			<isNotNull property="systemId">
+			    system_id = #systemId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="systemName">
+				system_name like '%$systemName$%'
+			</isNotNull>
+			<isNotNull prepend="AND" property="valid">
+				valid = #valid#
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty prepend="ORDER BY"
+				property="orderByColumnSql">
+				$orderByColumnSql$
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="getSystemCount" resultClass="Integer">
+		select count(1) from t_cams_system
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="systemName">
+				system_name like '%$systemName$%'
+			</isNotNull>
+		</dynamic>
+	</select>
+	<insert id="saveAddSystem" parameterClass="systempo">
+		insert into t_cams_system
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="systemId">system_id</isNotNull>
+			<isNotNull prepend="," property="systemName">
+				system_Name
+			</isNotNull>
+			<isNotNull prepend="," property="systemDesc">
+				system_desc
+			</isNotNull>
+			<isNotNull prepend="," property="valid">valid</isNotNull>
+			<isNotNull prepend="," property="loginUrl">login_url</isNotNull>
+		</dynamic>
+		,last_update) values
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="systemId">
+				#systemId#
+			</isNotNull>
+			<isNotNull prepend="," property="systemName">
+				#systemName#
+			</isNotNull>
+			<isNotNull prepend="," property="systemDesc">
+				#systemDesc#
+			</isNotNull>
+			<isNotNull prepend="," property="valid">#valid#</isNotNull>
+			<isNotNull prepend="," property="loginUrl">#loginUrl#</isNotNull>
+		</dynamic>
+		,sysdate)
+	</insert>
+	<delete id="deleteSystems" parameterClass="java.lang.String">
+		delete  t_cams_system  where system_id=#value#
+	</delete>
+	<update id="updateSystem" parameterClass="systempo">
+		<![CDATA[update t_cams_system set system_desc=#systemDesc#,valid=#valid#,login_url=#loginUrl#,last_update=sysdate where system_id = #systemId#]]>
+	</update>
+</sqlMap>

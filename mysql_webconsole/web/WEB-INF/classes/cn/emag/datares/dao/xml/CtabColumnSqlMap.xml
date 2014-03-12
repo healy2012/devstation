@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.CtabColumn" class="cn.emag.datares.domain.Column">
+        <result property="tab_id" column="tab_id"/>
+        <result property="col_sqlname" column="col_sqlname"/>
+        <result property="col_sqltype" column="col_sqltype"/>
+        <result property="col_size" column="col_size"/>
+        <result property="col_desc" column="col_desc"/>
+        <result property="isnullable" column="isnullable"/>
+        <result property="ispk" column="ispk"/>
+        <result property="datadict" column="datadict"/>
+        <result property="sub_tab_id" column="sub_tab_id"/>
+        <result property="sub_tab_col_sqlname" column="sub_tab_col_sqlname"/>
+        <result property="validation_type" column="validation_type"/>
+        <result property="create_time" column="create_time"/>
+        <result property="update_time" column="update_time"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="CtabColumn.columns">
+	    <![CDATA[
+        tab_id ,col_sqlname ,col_sqltype ,col_size ,col_desc ,isnullable ,ispk ,datadict ,sub_tab_id ,sub_tab_col_sqlname ,validation_type ,create_time ,update_time 
+	    ]]>
+	</sql>
+	
+    <insert id="CtabColumn.insert" >
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+        INSERT INTO c_tab_column (
+	        tab_id,
+	        col_sqlname
+        	<isNotNull prepend="," property="col_sqltype">col_sqltype</isNotNull>
+        	<isNotNull prepend="," property="col_size">col_size</isNotNull>
+        	<isNotNull prepend="," property="col_desc">col_desc</isNotNull>
+        	<isNotNull prepend="," property="isnullable">isnullable</isNotNull>
+        	<isNotNull prepend="," property="ispk">ispk</isNotNull>
+        	<isNotNull prepend="," property="datadict">datadict</isNotNull>
+        	<isNotNull prepend="," property="sub_tab_id">sub_tab_id</isNotNull>
+        	<isNotNull prepend="," property="sub_tab_col_sqlname">sub_tab_col_sqlname</isNotNull>
+        	<isNotNull prepend="," property="validation_type">validation_type</isNotNull>
+        	<isNotNull prepend="," property="create_time">create_time</isNotNull>
+        	<isNotNull prepend="," property="update_time">update_time</isNotNull>
+        ) VALUES (
+	       #tab_id#,
+	       #col_sqlname#
+        	<isNotNull prepend="," property="col_sqltype">#col_sqltype#</isNotNull>
+        	<isNotNull prepend="," property="col_size">#col_size#</isNotNull>
+        	<isNotNull prepend="," property="col_desc">#col_desc#</isNotNull>
+        	<isNotNull prepend="," property="isnullable">#isnullable#</isNotNull>
+        	<isNotNull prepend="," property="ispk">#ispk#</isNotNull>
+        	<isNotNull prepend="," property="datadict">#datadict#</isNotNull>
+        	<isNotNull prepend="," property="sub_tab_id">#sub_tab_id#</isNotNull>
+        	<isNotNull prepend="," property="sub_tab_col_sqlname">#sub_tab_col_sqlname#</isNotNull>
+        	<isNotNull prepend="," property="validation_type">#validation_type#</isNotNull>
+        	<isNotNull prepend="," property="create_time">#create_time#</isNotNull>
+        	<isNotNull prepend="," property="update_time">#update_time#</isNotNull>
+        )
+    </insert>
+
+    <update id="CtabColumn.update" >
+        UPDATE c_tab_column SET
+	        tab_id = tab_id,
+	        col_sqlname = col_sqlname
+	        <isNotNull prepend="," property="col_sqltype">col_sqltype = #col_sqltype#</isNotNull>
+	        <isNotNull prepend="," property="col_size">col_size = #col_size#</isNotNull>
+	        <isNotNull prepend="," property="col_desc">col_desc = #col_desc#</isNotNull>
+	        <isNotNull prepend="," property="isnullable">isnullable = #isnullable#</isNotNull>
+	        <isNotNull prepend="," property="ispk">ispk = #ispk#</isNotNull>
+	        <isNotNull prepend="," property="datadict">datadict = #datadict#</isNotNull>
+	        <isNotNull prepend="," property="sub_tab_id">sub_tab_id = #sub_tab_id#</isNotNull>
+	        <isNotNull prepend="," property="sub_tab_col_sqlname">sub_tab_col_sqlname = #sub_tab_col_sqlname#</isNotNull>
+	        <isNotNull prepend="," property="validation_type">validation_type = #validation_type#</isNotNull>
+	        <isNotNull prepend="," property="create_time">create_time = #create_time#</isNotNull>
+	        <isNotNull prepend="," property="update_time">update_time = #update_time#</isNotNull>
+        WHERE 
+    <![CDATA[
+	        tab_id = #tab_id#  AND 
+	        col_sqlname = #col_sqlname# 
+    ]]>
+    </update>
+
+    <delete id="CtabColumn.delete">
+    <![CDATA[
+        DELETE FROM c_tab_column WHERE
+        tab_id = #tab_id#  AND 
+        col_sqlname = #col_sqlname# 
+    ]]>
+    </delete>
+    
+    <delete id="CtabColumn.deleteMultipleByTabId">
+    <![CDATA[
+        DELETE FROM c_tab_column WHERE
+        tab_id in ($tab_id$)
+    ]]>
+    </delete>
+    
+    <select id="CtabColumn.getById" resultMap="RM.CtabColumn">
+	    SELECT <include refid="CtabColumn.columns"/>
+	    <![CDATA[
+	        FROM c_tab_column 
+	        WHERE 
+		        tab_id = #tab_id#  AND 
+		        col_sqlname = #col_sqlname# 
+	    ]]>
+    </select>
+
+	<sql id="CtabColumn.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="tab_id">
+		             tab_id = #tab_id#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="col_sqlname">
+		             col_sqlname = #col_sqlname#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="col_sqltype">
+		             col_sqltype = #col_sqltype#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="col_size">
+		             col_size = #col_size#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="col_desc">
+		             col_desc = #col_desc#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="isnullable">
+		             isnullable = #isnullable#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="ispk">
+		             ispk = #ispk#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="datadict">
+		             datadict = #datadict#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="sub_tab_id">
+		             sub_tab_id = #sub_tab_id#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="sub_tab_col_sqlname">
+		             sub_tab_col_sqlname = #sub_tab_col_sqlname#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="validation_type">
+		             validation_type = #validation_type#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTimeBegin">
+		             create_time >= #createTimeBegin#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTimeEnd">
+		             create_time &lt;= #createTimeEnd#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updateTimeBegin">
+		             update_time >= #updateTimeBegin#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updateTimeEnd">
+		             update_time &lt;= #updateTimeEnd#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="CtabColumn.findPage.count" resultClass="long">
+        SELECT count(*) FROM c_tab_column <include refid="CtabColumn.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="CtabColumn.findPage" resultMap="RM.CtabColumn">
+    	SELECT <include refid="CtabColumn.columns"/> FROM c_tab_column 
+		<include refid="CtabColumn.findPage.where"/>
+		limit 
+		     #pageStart#,#pageEnd#
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+    
+    
+    <select id="CtabColumn.queryTableColumnList" resultMap="RM.CtabColumn">
+    	SELECT <include refid="CtabColumn.columns"/> FROM c_tab_column 
+		<include refid="CtabColumn.findPage.where"/>
+    </select>
+
+	
+</sqlMap>
+

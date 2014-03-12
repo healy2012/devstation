@@ -1,0 +1,139 @@
+@charset "utf-8";
+
+/*========== 登录 style ==========*/
+html,body { 
+  height:100%;
+  overflow:hidden;
+}
+body { 
+  overflow-y:auto;
+  overflow-x:hidden;
+  *position:relative;/*only ie6 ie7*/
+}
+.content {
+  width:100%;
+  height:100%;
+  padding-top:60px;
+  background:url(../images/bg_tw.gif) repeat left top;
+}
+body>.content{
+  height:auto;
+  min-height:100%;/* 设定最小高度 only ff */  
+} 
+.topbar {
+  background:url(../images/bg_repeatx.gif) repeat-x 0 -128px;
+  width:100%;
+  height:14px;
+  clear:both;
+  border-bottom:1px solid #007496;
+}
+.form {
+  width:710px;
+  display:block;
+  padding-bottom:90px;
+  _padding-bottom:70px;/* only ie6 */
+  margin:0 auto;
+  border-bottom:2px solid #003c7d;
+  background:url(../images/bg_login.png) no-repeat left bottom;
+  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale, src="/gpms/global/images/bg_login.png");/* only ie6 src 是指加载滤镜的页面相对于图片的路径。*/
+  _background-image:none;/* only ie6 */
+  color:#4674a6;
+}
+
+h1.box_login_tit {
+  background:url(../images/bg_login_tit.png) no-repeat left top;
+  _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/gpms/global/images/bg_login_tit.png");/* only ie6 src 是指加载滤镜的页面相对于图片的路径。*/
+  _background-image:none;/* only ie6 */
+  width:710px;
+  height:80px;
+  margin:0 auto;
+} 
+ul.box_login, .box_btn { 
+  padding-top:25px;
+  _position:relative;/* only ie6 */
+  _z-index:100;/* only ie6 */
+}
+ul.box_login {
+  float:left;
+  width:370px;
+  padding-left:95px;
+  font-weight:bold;
+}
+ul.box_login li { 
+  font-size:16px;
+  padding:23px 0; /* 不含验证码输入项 */
+  /*padding:10px 0;*/ /* 含验证码输入项 */
+}
+ul.box_login li span {
+  background:url(../images/bg_input.gif) no-repeat 0 0;
+  width:263px;
+  height:35px;
+  display:inline-block;
+  text-align:center;
+  vertical-align:middle;
+}
+ul.box_login li span.input { background-position:0 -35px;}
+ul.box_login input {
+  background:url(../images/bg_input.gif) repeat-x 0 -70px;
+  margin:1px 0;
+  width:241px;
+  height:31px;
+  line-height:31px;
+  color:#4674a6;
+  font-size:14px;
+}
+ul.box_login .img { 
+  cursor:pointer;
+  position:relative;
+  z-index:2;
+  top:-27px;
+  left:280px;
+  display:block;
+}
+.box_btn { 
+  float:right;
+  width:155px;
+  padding-right:60px;
+}
+.btn_login, .btn_reset,
+.btn_login:hover, .btn_reset:hover {
+  background:url(../images/btn_login.gif) no-repeat 0 0;
+  width:131px;
+  height:56px;
+  margin:10px 0 22px 0;
+}
+.btn_reset { background-position:0 -56px;}
+.btn_login:hover, .btn_reset:hover { background-position:-131px 0;}
+.btn_reset:hover { background-position:-131px -56px;}
+p.warning {
+  text-align:center;
+  clear:both;
+  width:100%;
+  padding-top:15px;
+}
+
+/*========== 登录-脚部 style ==========*/
+p.footer {
+  width:710px;
+  border-top:1px solid #0080bb;
+  font-family:Verdana, Geneva, sans-serif;
+  text-align:center;
+  color:#FFF;
+  font-weight:bold;
+  clear:both;
+  margin:0 auto;
+  padding-top:15px;
+}
+
+/*========== 登录-验证 style ==========*/
+.form label { display:block;}
+.form label.error {
+  border:1px solid #F30;
+  color:#535353;
+  font-weight:normal;
+  width:88%;
+  line-height:18px;
+  background:#ffece5 url(../images/icon25.gif) no-repeat left -175px;
+  padding:3px 0 3px 25px;
+  margin:5px 0 -10px 0;
+}

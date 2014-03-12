@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="cn.emag.demo.domain.Message">
+	<typeAlias alias="Message" type="cn.emag.demo.domain.Message"/>
+	
+	<resultMap id="Message" class="Message">
+		  <result property="messageId" column="MESSAGE_ID" />
+		  <result property="messageAuthor" column="MESSAGE_AUTHOR" />
+		  <result property="messageContent" column="MESSAGE_CONTENT" />
+		  <result property="messageTime" column="MESSAGE_TIME" />
+		  <result property="state" column="STATE" />
+	</resultMap>	
+  	
+  	<select id="listMessage" resultMap="Message">
+  		select
+  				MESSAGE_ID, 
+  				MESSAGE_AUTHOR, 
+  				MESSAGE_CONTENT, 
+  				MESSAGE_TIME,
+  				STATE
+		from 
+				MESSAGE 
+    </select>
+
+	<insert id="insertMessage" parameterClass="Message">
+		insert into MESSAGE 
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="messageId">
+				MESSAGE_ID
+			</isNotNull>
+			<isNotNull prepend="," property="messageAuthor">
+				MESSAGE_AUTHOR
+			</isNotNull>
+			<isNotNull prepend="," property="messageContent">
+				MESSAGE_CONTENT
+			</isNotNull>
+			<isNotNull prepend="," property="messageTime">
+				MESSAGE_TIME
+			</isNotNull>
+			<isNotNull prepend="," property="state">
+				STATE
+			</isNotNull>
+		</dynamic>
+		) values 
+		<dynamic prepend="(">
+			<isNotNull prepend="," property="messageId">
+	   			#messageId#
+			</isNotNull>
+			<isNotNull prepend="," property="messageAuthor">
+	   			#messageAuthor#
+			</isNotNull>
+			<isNotNull prepend="," property="messageContent">
+	   			#messageContent#
+			</isNotNull>
+			<isNotNull prepend="," property="messageTime">
+	   			#messageTime#
+			</isNotNull>
+			<isNotNull prepend="," property="state">
+	   			#state#
+			</isNotNull>
+		</dynamic>
+  		)	
+  	</insert>
+</sqlMap>	

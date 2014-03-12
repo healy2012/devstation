@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.CtabColumnDisp" class="cn.emag.datares.domain.ColumnDisp">
+        <result property="tab_disp_id" column="tab_disp_id"/>
+        <result property="full_col_sqlname" column="full_col_sqlname"/>
+        <result property="is_in_list" column="is_in_list"/>
+        <result property="list_disp_name" column="list_disp_name"/>
+        <result property="support_sort" column="support_sort"/>
+        <result property="support_query" column="support_query"/>
+        <result property="list_disp_order" column="list_disp_order"/>
+        <result property="is_in_form" column="is_in_form"/>
+        <result property="form_disp_name" column="form_disp_name"/>
+        <result property="support_update" column="support_update"/>
+        <result property="form_disp_type" column="form_disp_type"/>
+        <result property="sub_tab_disp_cols" column="sub_tab_disp_cols"/>
+        <result property="form_disp_order" column="form_disp_order"/>
+        <result property="create_time" column="create_time"/>
+        <result property="update_time" column="update_time"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="CtabColumnDisp.columns">
+	    <![CDATA[
+        tab_disp_id ,full_col_sqlname ,is_in_list ,list_disp_name ,support_sort ,support_query ,list_disp_order ,is_in_form ,form_disp_name ,support_update ,form_disp_type ,sub_tab_disp_cols ,form_disp_order ,create_time ,update_time 
+	    ]]>
+	</sql>
+	
+    <insert id="CtabColumnDisp.insert" >
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+        INSERT INTO c_tab_column_disp (
+	        tab_disp_id,
+	        full_col_sqlname
+        	<isNotNull prepend="," property="is_in_list">is_in_list</isNotNull>
+        	<isNotNull prepend="," property="list_disp_name">list_disp_name</isNotNull>
+        	<isNotNull prepend="," property="support_sort">support_sort</isNotNull>
+        	<isNotNull prepend="," property="support_query">support_query</isNotNull>
+        	<isNotNull prepend="," property="list_disp_order">list_disp_order</isNotNull>
+        	<isNotNull prepend="," property="is_in_form">is_in_form</isNotNull>
+        	<isNotNull prepend="," property="form_disp_name">form_disp_name</isNotNull>
+        	<isNotNull prepend="," property="support_update">support_update</isNotNull>
+        	<isNotNull prepend="," property="form_disp_type">form_disp_type</isNotNull>
+        	<isNotNull prepend="," property="sub_tab_disp_cols">sub_tab_disp_cols</isNotNull>
+        	<isNotNull prepend="," property="form_disp_order">form_disp_order</isNotNull>
+        	<isNotNull prepend="," property="create_time">create_time</isNotNull>
+        	<isNotNull prepend="," property="update_time">update_time</isNotNull>
+        ) VALUES (
+	       #tab_disp_id#,
+	       #full_col_sqlname#
+        	<isNotNull prepend="," property="is_in_list">#is_in_list#</isNotNull>
+        	<isNotNull prepend="," property="list_disp_name">#list_disp_name#</isNotNull>
+        	<isNotNull prepend="," property="support_sort">#support_sort#</isNotNull>
+        	<isNotNull prepend="," property="support_query">#support_query#</isNotNull>
+        	<isNotNull prepend="," property="list_disp_order">#list_disp_order#</isNotNull>
+        	<isNotNull prepend="," property="is_in_form">#is_in_form#</isNotNull>
+        	<isNotNull prepend="," property="form_disp_name">#form_disp_name#</isNotNull>
+        	<isNotNull prepend="," property="support_update">#support_update#</isNotNull>
+        	<isNotNull prepend="," property="form_disp_type">#form_disp_type#</isNotNull>
+        	<isNotNull prepend="," property="sub_tab_disp_cols">#sub_tab_disp_cols#</isNotNull>
+        	<isNotNull prepend="," property="form_disp_order">#form_disp_order#</isNotNull>
+        	<isNotNull prepend="," property="create_time">#create_time#</isNotNull>
+        	<isNotNull prepend="," property="update_time">#update_time#</isNotNull>
+        )
+    </insert>
+
+    <update id="CtabColumnDisp.update" >
+        UPDATE c_tab_column_disp SET
+	        tab_disp_id = tab_disp_id,
+	        full_col_sqlname = full_col_sqlname
+	        <isNotNull prepend="," property="is_in_list">is_in_list = #is_in_list#</isNotNull>
+	        <isNotNull prepend="," property="list_disp_name">list_disp_name = #list_disp_name#</isNotNull>
+	        <isNotNull prepend="," property="support_sort">support_sort = #support_sort#</isNotNull>
+	        <isNotNull prepend="," property="support_query">support_query = #support_query#</isNotNull>
+	        <isNotNull prepend="," property="list_disp_order">list_disp_order = #list_disp_order#</isNotNull>
+	        <isNotNull prepend="," property="is_in_form">is_in_form = #is_in_form#</isNotNull>
+	        <isNotNull prepend="," property="form_disp_name">form_disp_name = #form_disp_name#</isNotNull>
+	        <isNotNull prepend="," property="support_update">support_update = #support_update#</isNotNull>
+	        <isNotNull prepend="," property="form_disp_type">form_disp_type = #form_disp_type#</isNotNull>
+	        <isNotNull prepend="," property="sub_tab_disp_cols">sub_tab_disp_cols = #sub_tab_disp_cols#</isNotNull>
+	        <isNotNull prepend="," property="form_disp_order">form_disp_order = #form_disp_order#</isNotNull>
+	        <isNotNull prepend="," property="create_time">create_time = #create_time#</isNotNull>
+	        <isNotNull prepend="," property="update_time">update_time = #update_time#</isNotNull>
+        WHERE 
+    <![CDATA[
+	        tab_disp_id = #tab_disp_id#  AND 
+	        full_col_sqlname = #full_col_sqlname# 
+    ]]>
+    </update>
+
+    <delete id="CtabColumnDisp.delete">
+    <![CDATA[
+        DELETE FROM c_tab_column_disp WHERE
+        tab_disp_id = #tab_disp_id#  AND 
+        full_col_sqlname = #full_col_sqlname# 
+    ]]>
+    </delete>
+    
+    <delete id="CtabColumnDisp.deleteMultipleByTabDispId">
+    <![CDATA[
+        DELETE FROM c_tab_column_disp WHERE
+        tab_disp_id in ($tab_disp_id$)
+    ]]>
+    </delete>
+    
+    <select id="CtabColumnDisp.getById" resultMap="RM.CtabColumnDisp">
+	    SELECT <include refid="CtabColumnDisp.columns"/>
+	    <![CDATA[
+	        FROM c_tab_column_disp 
+	        WHERE 
+		        tab_disp_id = #tab_disp_id#  AND 
+		        full_col_sqlname = #full_col_sqlname# 
+	    ]]>
+    </select>
+
+	<sql id="CtabColumnDisp.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="tab_disp_id">
+		             tab_disp_id = #tab_disp_id#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="full_col_sqlname">
+		             full_col_sqlname = #full_col_sqlname#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="is_in_list">
+		             is_in_list = #is_in_list#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="list_disp_name">
+		             list_disp_name = #list_disp_name#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_sort">
+		             support_sort = #support_sort#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_query">
+		             support_query = #support_query#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="list_disp_order">
+		             list_disp_order = #list_disp_order#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="is_in_form">
+		             is_in_form = #is_in_form#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="form_disp_name">
+		             form_disp_name = #form_disp_name#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_update">
+		             support_update = #support_update#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="form_disp_type">
+		             form_disp_type = #form_disp_type#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="sub_tab_disp_cols">
+		             sub_tab_disp_cols = #sub_tab_disp_cols#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="form_disp_order">
+		             form_disp_order = #form_disp_order#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTimeBegin">
+		             create_time >= #createTimeBegin#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTimeEnd">
+		             create_time &lt;= #createTimeEnd#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updateTimeBegin">
+		             update_time >= #updateTimeBegin#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updateTimeEnd">
+		             update_time &lt;= #updateTimeEnd#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="CtabColumnDisp.findPage.count" resultClass="long">
+        SELECT count(*) FROM c_tab_column_disp <include refid="CtabColumnDisp.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="CtabColumnDisp.findPage" resultMap="RM.CtabColumnDisp">
+    	SELECT <include refid="CtabColumnDisp.columns"/> FROM c_tab_column_disp 
+		<include refid="CtabColumnDisp.findPage.where"/>
+		limit 
+		     #pageStart#,#pageEnd#
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+    
+    <select id="CtabColumnDisp.queryTableColumnDispList" resultMap="RM.CtabColumnDisp">
+    	SELECT <include refid="CtabColumnDisp.columns"/> FROM c_tab_column_disp 
+		<include refid="CtabColumnDisp.findPage.where"/>
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+
+	
+</sqlMap>
+

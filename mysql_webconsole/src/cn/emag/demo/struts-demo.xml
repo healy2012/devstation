@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="demo" namespace="/demo" extends="default">
+		<action name="paginator"
+			class="cn.emag.demo.web.action.PaginationExampleAction">
+			<result>/demo/paginator/paginator.jsp</result>
+		</action>
+
+		<action name="test"
+			class="cn.emag.demo.web.ajax.DemoAjaxAction" />
+
+		<action name="queryPortalUser"
+			class="cn.emag.demo.web.action.PortalUserAction">
+			<result>/demo/portal/queryPortalUser.jsp</result>
+		</action>
+
+		<action name="delUsers"
+			class="cn.emag.demo.web.action.PortalUserAction"
+			method="delUsers">
+			<result type="redirectAction">queryPortalUser</result>
+		</action>
+
+		<action name="addUser"
+			class="cn.emag.demo.web.action.PortalUserAction"
+			method="addUser">
+			<result>/demo/portal/createUser.jsp</result>
+		</action>
+
+		<action name="createUser"
+			class="cn.emag.demo.web.action.PortalUserAction"
+			method="createUser">
+			<result type="redirectAction">queryPortalUser</result>
+		</action>
+
+		<action name="updateUser"
+			class="cn.emag.demo.web.action.PortalUserAction"
+			method="updateUser">
+			<result>/demo/portal/updateUser.jsp</result>
+		</action>
+
+		<action name="updateSaveUser"
+			class="cn.emag.demo.web.action.PortalUserAction"
+			method="updateSaveUser">
+			<result type="redirectAction">queryPortalUser</result>
+		</action>
+
+		<action name="validateUser"
+			class="cn.emag.demo.web.action.PortalRemoteValAction"
+			method="validateUser">
+			<result type="stream">
+				<param name="contentType">text/html</param><!-- 默认为text/plain -->
+				<param name="inputName">inputStream</param><!-- 默认就为inputStream -->
+			</result>
+		</action>
+	</package>
+</struts>

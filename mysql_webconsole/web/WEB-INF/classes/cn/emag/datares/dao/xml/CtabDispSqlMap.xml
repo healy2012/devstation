@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.CtabDisp" class="cn.emag.datares.domain.TableDisp">
+        <result property="tab_disp_id" column="tab_disp_id"/>
+        <result property="tab_id" column="tab_id"/>
+        <result property="page_count" column="page_count"/>
+        <result property="support_query" column="support_query"/>
+        <result property="support_new" column="support_new"/>
+        <result property="support_del" column="support_del"/>
+        <result property="support_update" column="support_update"/>
+        <result property="support_sort" column="support_sort"/>
+        <result property="support_export" column="support_export"/>
+        <result property="layout_type" column="layout_type"/>
+        <result property="create_time" column="create_time"/>
+        <result property="update_time" column="update_time"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="CtabDisp.columns">
+	    <![CDATA[
+        tab_disp_id ,tab_id ,page_count ,support_query ,support_new ,support_del ,support_update ,support_sort ,support_export ,layout_type ,create_time ,update_time 
+	    ]]>
+	</sql>
+	
+    <insert id="CtabDisp.insert" >
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+        INSERT INTO c_tab_disp (
+        	tab_id
+        	<isNotNull prepend="," property="page_count">page_count</isNotNull>
+        	<isNotNull prepend="," property="support_query">support_query</isNotNull>
+        	<isNotNull prepend="," property="support_new">support_new</isNotNull>
+        	<isNotNull prepend="," property="support_del">support_del</isNotNull>
+        	<isNotNull prepend="," property="support_update">support_update</isNotNull>
+        	<isNotNull prepend="," property="support_sort">support_sort</isNotNull>
+        	<isNotNull prepend="," property="support_export">support_export</isNotNull>
+        	<isNotNull prepend="," property="layout_type">layout_type</isNotNull>
+        	<isNotNull prepend="," property="create_time">create_time</isNotNull>
+        	<isNotNull prepend="," property="update_time">update_time</isNotNull>
+        ) VALUES (
+        	#tab_id#
+        	<isNotNull prepend="," property="page_count">#page_count#</isNotNull>
+        	<isNotNull prepend="," property="support_query">#support_query#</isNotNull>
+        	<isNotNull prepend="," property="support_new">#support_new#</isNotNull>
+        	<isNotNull prepend="," property="support_del">#support_del#</isNotNull>
+        	<isNotNull prepend="," property="support_update">#support_update#</isNotNull>
+        	<isNotNull prepend="," property="support_sort">#support_sort#</isNotNull>
+        	<isNotNull prepend="," property="support_export">#support_export#</isNotNull>
+        	<isNotNull prepend="," property="layout_type">#layout_type#</isNotNull>
+        	<isNotNull prepend="," property="create_time">#create_time#</isNotNull>
+        	<isNotNull prepend="," property="update_time">#update_time#</isNotNull>
+        )
+        
+        <selectKey resultClass="java.lang.String" type="post" keyProperty="tab_disp_id" >
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="CtabDisp.update" >
+        UPDATE c_tab_disp SET
+	        tab_disp_id = tab_disp_id
+	        <isNotNull prepend="," property="tab_id">tab_id = #tab_id#</isNotNull>
+	        <isNotNull prepend="," property="page_count">page_count = #page_count#</isNotNull>
+	        <isNotNull prepend="," property="support_query">support_query = #support_query#</isNotNull>
+	        <isNotNull prepend="," property="support_new">support_new = #support_new#</isNotNull>
+	        <isNotNull prepend="," property="support_del">support_del = #support_del#</isNotNull>
+	        <isNotNull prepend="," property="support_update">support_update = #support_update#</isNotNull>
+	        <isNotNull prepend="," property="support_sort">support_sort = #support_sort#</isNotNull>
+	        <isNotNull prepend="," property="support_export">support_export = #support_export#</isNotNull>
+	        <isNotNull prepend="," property="layout_type">layout_type = #layout_type#</isNotNull>
+	        <isNotNull prepend="," property="create_time">create_time = #create_time#</isNotNull>
+	        <isNotNull prepend="," property="update_time">update_time = #update_time#</isNotNull>
+        WHERE 
+    <![CDATA[
+	        tab_disp_id = #tab_disp_id# 
+    ]]>
+    </update>
+
+    <delete id="CtabDisp.delete">
+    <![CDATA[
+        DELETE FROM c_tab_disp WHERE
+        tab_disp_id = #tab_disp_id# 
+    ]]>
+    </delete> 
+    
+    <delete id="CtabDisp.deleteMultipleByTabId">
+    <![CDATA[
+        DELETE FROM c_tab_disp WHERE
+        tab_id in ($tab_id$) 
+    ]]>
+    </delete>
+
+	<sql id="CtabDisp.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="tab_disp_id">
+		             tab_disp_id = #tab_disp_id#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="tab_id">
+		             tab_id = #tab_id#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="page_count">
+		             page_count = #page_count#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_query">
+		             support_query = #support_query#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_new">
+		             support_new = #support_new#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_del">
+		             support_del = #support_del#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_update">
+		             support_update = #support_update#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_sort">
+		             support_sort = #support_sort#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="support_export">
+		             support_export = #support_export#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="layout_type">
+		             layout_type = #layout_type#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	
+	<select id="CtabDisp.getById" resultMap="RM.CtabDisp">
+	    SELECT <include refid="CtabDisp.columns"/>
+	        FROM c_tab_disp 
+	        <include refid="CtabDisp.findPage.where"/> 
+    </select>
+    
+    <select id="CtabDisp.getMultipleByIds" resultMap="RM.CtabDisp">
+	    SELECT <include refid="CtabDisp.columns"/>
+	        FROM c_tab_disp 
+	        Where tab_id in(#tab_id#)
+    </select>
+	 
+    <select id="CtabDisp.findPage.count" resultClass="long">
+        SELECT count(*) FROM c_tab_disp <include refid="CtabDisp.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="CtabDisp.findPage" resultMap="RM.CtabDisp">
+    	SELECT <include refid="CtabDisp.columns"/> FROM c_tab_disp 
+		<include refid="CtabDisp.findPage.where"/>
+		limit 
+		     #pageStart#,#pageEnd#
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+
+	
+</sqlMap>
+

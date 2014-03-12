@@ -1,0 +1,137 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+
+* { 
+padding: 0; 
+margin: 0; 
+border: 0; 
+}
+input {outline: none;}
+
+textarea {outline: none;}
+
+body, th, td, input, select, textarea, button { font: 12px/1.5em Verdana, "Lucida Grande", Arial, Helvetica, sans-serif; }
+
+body, h1, h2, h3, h4, h5, h6, p,ol, ul, dl, dt,input, dd, form, fieldset { margin: 0; padding: 0; }
+
+h1, h2, h3, h4, h5, h6, p, ul, dl, dt, dd, form{ font-style:normal; font-weight:normal;}
+
+ul li { list-style: none; }
+
+a { color:#000; text-decoration: underline; }
+
+a img { border:none; }
+
+a:hover { color:red; text-decoration:underline; }
+
+em{font-style:normal;}
+
+.clear{ clear:both;}
+
+/*填加谷歌hack*/
+input {outline: none;}
+
+textarea {outline: none;}
+
+/*填加谷歌hack*/
+
+
+
+/*登陆页*/
+
+.Body{background-color:#1A5D88;}
+
+.landBox{ width:100%; height:100%; overflow:hidden; background-color:#1A5D88; }
+
+.landBox  .centerMatter{ width:843px; height:auto; overflow:hidden; margin:0 auto;} 
+
+.centerMatter  .logo{ width:843px; height:117px; overflow:hidden; background:top no-repeat url(../images/2wde_07.jpg);}
+
+.centerMatter  .title{ width:843px; height:114px; overflow:hidden; background:top no-repeat url(../images/2wde_08.jpg);}
+
+.centerMatter  .LoginBox{width:843px; height:256px; overflow:hidden; background:top no-repeat url(../images/2wde_09.jpg);}
+
+
+.LoginBox .CenterBack{float:left;width:377px; height:318px; overflow:hidden; margin-left:250px;_margin-left:125px;}
+
+.CenterBack  .importA{ width: 255px; height:30px; overflow:hidden; margin:52px 0px 0px 68px;}
+
+.CenterBack  .importA  input{ width:110px; height:20px; overflow:hidden; margin-left:25px;}
+
+.CenterBack  .importA  label{ font-size:14px; color:#DBF2FF;}
+
+.CenterBack  .importB{ width: 255px; height:30px; overflow:hidden; margin:5px 0px 0px 68px;}
+
+.CenterBack  .importB  input{ width:110px; height:20px; overflow:hidden; margin-left:25px;}
+
+.CenterBack  .importB  label{ font-size:14px; color:#DBF2FF;}
+
+.CenterBack  .importC{ width: 285px; height:auto; overflow:hidden; margin:5px 0px 0px 50px;}
+
+.CenterBack  .importC h4{ font-size:12px; color:#FFF;height:20px; line-height:20px; overflow:hidden; }
+
+.CenterBack  .importD{ width: 255px; height:44px; overflow:hidden; margin:12px 0px 0px 70px;_margin:12px 0px 0px 50px;+margin:12px 0px 0px 35px;}
+
+.CenterBack  .importD  .as{ float:left; cursor:pointer; border:0; width:85px; height:42px; overflow:hidden; margin-left:24px;_margin-left:20px; background:top no-repeat url(../images/ccccccc_03.jpg);}
+
+.CenterBack  .importD  .cd{float:left;cursor:pointer; border:0; width:84px; height:42px; overflow:hidden; margin-left:14px;_margin-left:5px; background:top no-repeat url(../images/ccccccc_04.jpg);}
+
+
+.CenterBack  .importC  label{ font-size:14px; color:#DBF2FF;}
+
+
+
+.centerMatter  .footBox{text-align:center;color:#fff; width:843px; height:161px; overflow:hidden;background:top no-repeat url(../images/aaaa_10.jpg);}
+
+.centerMatter  .footBox  span{ height:50px; line-height:50px; margin-left:20px;}
+
+/*登陆页END*/
+
+
+
+
+/*登陆页弹出框*/
+
+.append_parent { position:relative; width:360px; margin:0px auto; }
+
+.append_child{ position:absolute; z-index:5; margin-top:104px; margin-left:390px; _margin:244px 0px 0px -5px; }
+
+.append_childW{ position:absolute; z-index:5; margin-top:244px; margin-left:8px; _margin:244px 0px 0px -5px; }
+
+.LoginPop{ width:360px; height:229px; background:top no-repeat url(../images/tanc_07.jpg); }
+
+.LoginPop h4{ font-size:18px; color:#005F95; width:300px; height:55px; line-height:55px; overflow:hidden; margin-left:30px;_margin-left:45px;}
+
+.LoginPop h5{ font-size:14px;color:#005F95;width:320px; height:30px; line-height:30px; overflow:hidden; margin-left:10px;_margin-left:45px;}
+
+.LoginPop  .confirm{ width:295px; height:43px; overflow:hidden; margin-left:60px; margin-bottom:10px; +margin:0px 0px 10px 30px;}
+
+.LoginPop  .confirm  .shuru{ float:left; margin-top:15px;width:140px; height:18px; overflow:hidden; border:0; float:left\9; margin-top:12px\9; _margin-left:15px;  }
+
+.LoginPop  .confirm  .queren{ float:left;width:84px;cursor:pointer; margin-left:20px; height:43px; overflow:hidden; border:0; background:top no-repeat url(../images/wsd_03.jpg);}
+
+.LoginPop h6{ font-size:12px; color:#005F95; width:320px; height:20px; line-height:20px; overflow:hidden; margin-left:25px;_margin-left:40px;}
+
+
+.LoginPop h6 a{color:#F00;}
+
+
+/*谷歌验证框hack*/
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.LoginPop  .confirm  .shuru{ float:left;width:140px; height:18px; overflow:hidden; border:0; margin-top:12px;}
+
+.LoginPop  .confirm  .queren{float:left;width:84px;cursor:pointer; margin-left:20px; height:43px; overflow:hidden; border:0; background:top no-repeat url(../images/wsd_03.jpg);}
+}
+
+/*左侧空白区域填充框*/ 
+
+.statistics{ width:715px; height:635px; overflow:hidden; margin:5px auto 0px; }
+
+/*修改密码*/
+
+.append_parentA { position:relative; width:360px; margin:0; }
+
+.append_childA{ position:absolute; z-index:5; margin-top:77px; margin-left:500px; _margin:244px 0px 0px -5px; }

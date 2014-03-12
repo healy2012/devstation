@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>edf</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring/*.xml</param-value>
+	</context-param>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<listener>
+		<listener-class>
+			cn.emag.framework.spring.ContextLoaderListener
+		</listener-class>
+	</listener>
+		<!--Spring ApplicationContext 载入 -->
+
+	<!-- 使Spring支持request与session的scope,如:<bean id="loginAction" class="com.foo.LoginAction" scope="request"/> -->
+	<listener>
+	  <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+	
+	<filter>
+		<filter-name>setEncoding</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>securityFilter</filter-name>
+		<filter-class>
+			cn.emag.framework.filters.SecurityFilter
+		</filter-class>
+		<init-param>
+			<param-name>loginURL</param-name>
+			<param-value>/signin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>unfilteredURIs</param-name>
+			<param-value>
+				(.*/signin\.action)|(.*/signin\.do)|(.*/signin)|
+				(.*/preLogin\.action)|(.*/preLogin\.do)|(.*/preLogin)|
+				(.*/login\.action)|(.*/login\.do)|(.*/login)|
+				(.*/index\.jsp$)|(.*/login\.jsp$)|(/.*\.js$)|(/.*\.css$)|(/.*\.png$)|(/.*\.jpg$)|(/.*\.gif$)|(/.*\.ico$)
+			</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>authFilter</filter-name>
+		<filter-class>
+			cn.emag.cams.intf.client.filter.AuthorizedFilter
+		</filter-class>
+		<init-param>
+			<param-name>authMenuUrl</param-name>
+			<param-value>0</param-value>
+		</init-param>
+		<init-param>
+			<param-name>authPermUrl</param-name>
+			<param-value>0</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cancelSysAdminAuth</param-name>
+			<param-value>1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>unAuthorizedURL</param-name>
+			<param-value>/global/jsp/unAuthorized.jsp</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>setEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>securityFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>authFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+    	<servlet-name>DynamicTreeServlet</servlet-name>
+    	<servlet-class>cn.emag.framework.taglib.tree.DynamicTreeServlet</servlet-class>
+  	</servlet>
+  
+    <!--<servlet>
+      <servlet-name>InitServlet</servlet-name>
+      <servlet-class>cn.emag.cams.intf.client.servlet.InitServlet</servlet-class>
+      <init-param>  
+        <param-name>systemId</param-name>  
+        <param-value>1</param-value>  
+     </init-param> 
+      <load-on-startup>4</load-on-startup>
+    </servlet>
+  	
+  	--><servlet-mapping>
+    	<servlet-name>DynamicTreeServlet</servlet-name>
+    	<url-pattern>*.Dynamictree</url-pattern>
+  	</servlet-mapping>
+  <!--<servlet-mapping>
+    <servlet-name>InitServlet</servlet-name>
+    <url-pattern>/servlet/InitServlet</url-pattern>
+  </servlet-mapping>
+  	
+  	--><session-config>
+		<session-timeout>180</session-timeout>
+	</session-config>
+	
+	<taglib>
+		<taglib-uri>/tags/emag</taglib-uri>
+		<taglib-location>/WEB-INF/tlds/emag.tld</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>/taglib/emag</taglib-uri>
+		<taglib-location>/WEB-INF/tlds/emagAuthorized.tld</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>/tags/dynamicTable</taglib-uri>
+		<taglib-location>/WEB-INF/tlds/dynamicTable.tld</taglib-location>
+	</taglib>
+	<!--
+	 <taglib>
+		<taglib-uri>/struts-tags</taglib-uri>
+		<taglib-location>/WEB-INF/lib/struts2-core-2.1.8.1.jar</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+		<taglib-location>/WEB-INF/lib/standard.jar</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
+		<taglib-location>/WEB-INF/lib/standard.jar</taglib-location>
+	</taglib>
+	
+	<taglib>
+		<taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
+		<taglib-location>/WEB-INF/lib/standard.jar</taglib-location>
+	</taglib>	 -->
+	
+</web-app>

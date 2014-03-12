@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>emagtag</shortname>
+	<uri>/taglib/emag</uri>	
+	<tag>
+		<name>menu</name>
+		<tagclass>cn.emag.cams.intf.client.taglib.AuthorizedMenuTag</tagclass>
+		<bodycontent>jsp</bodycontent>
+		<attribute>
+			<name>identifier</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>cancelSysAdminAuth</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>perm</name>
+		<tagclass>cn.emag.cams.intf.client.taglib.AuthorizedPermTag</tagclass>
+		<bodycontent>jsp</bodycontent>
+		<attribute>
+			<name>identifier</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>operation</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>cancelSysAdminAuth</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+</taglib>

@@ -1,0 +1,70 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+
+<menuconfig>
+<menus id="10001" name="监控与管理" imagName="">
+	<menu name="应用系统监控">
+		<menu name="系统监控管理" action="/monitor/listSystem.do" />
+		<menu name="接口监控管理" action="/monitor/manageMonitorInterface.do" />
+	</menu>
+	<menu name="数据库监控">
+		<menu name="数据库监控管理" action="/monitor/listDatabase.do" />
+		<menu name="表监控管理" action="/monitor/manageMonitorTable.do" />
+	</menu>
+	<menu name="告警管理">
+		<menu name="告警信息管理" action="/monitor/listAlertInfo.do" />
+	</menu>
+	<menu name="系统管理">
+		<menu name="用户管理" action="/demo/queryPortalUser.action" />
+		<menu name="告警授权管理" action="listAlarmAuthorizedManage.html"
+			display="false" />
+	</menu>
+</menus>
+<menus id="10002" name="test" imgName="">
+	<menu name="应用系统监控">
+		<menu name="系统监控管理" action="/monitor/listSystem.do" />
+		<menu name="接口监控管理" action="/monitor/manageMonitorInterface.do" />
+	</menu>
+	<menu name="数据库监控">
+		<menu name="数据库监控管理" action="/monitor/listDatabase.do" />
+		<menu name="表监控管理" action="/monitor/manageMonitorTable.do" />
+	</menu>
+	<menu name="告警管理">
+		<menu name="告警信息管理" action="/monitor/listAlertInfo.do" />
+	</menu>
+	<menu name="系统管理">
+		<menu name="用户管理" action="/demo/queryPortalUser.action" />
+		<menu name="告警授权管理" action="listAlarmAuthorizedManage.html"
+			display="false" />
+	</menu>
+</menus>
+
+<menus id="10003" name="test1" imgName="">
+	<menu name="Nicole">
+		<menu name="Nicole" action="/monitor/listSystem.do" />
+		<menu name="Nicole" action="/monitor/manageMonitorInterface.do" />
+	</menu>
+	<menu name="Nicole">
+		<menu name="Nicole" action="/monitor/listDatabase.do" />
+		<menu name="Nicole" action="/monitor/manageMonitorTable.do" />
+	</menu>
+	<menu name="Nicole">
+		<menu name="Nicole" action="/monitor/listAlertInfo.do" />
+	</menu>
+	<menu name="Nicole">
+		<menu name="Nicole" action="/demo/queryPortalUser.action" />
+		<menu name="Nicole" action="listAlarmAuthorizedManage.html"
+			display="false" />
+	</menu>
+</menus>
+<menus id="10004" name="testSingle" imgName="">
+	    <menu name="Nicole" action="/monitor/listSystem.do" />
+		<menu name="Nicole" action="/monitor/manageMonitorInterface.do" />
+		<menu name="Nicole" action="/monitor/listDatabase.do" />
+		<menu name="Nicole" action="/monitor/manageMonitorTable.do" />
+		<menu name="Nicole" action="/monitor/listAlertInfo.do" />
+		<menu name="Nicole" action="/demo/queryPortalUser.action" />
+		<menu name="Nicole" action="listAlarmAuthorizedManage.html" display="false" />
+</menus>
+
+</menuconfig>
+

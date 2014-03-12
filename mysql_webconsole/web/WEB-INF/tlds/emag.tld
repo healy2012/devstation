@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>emag</shortname>
+	<uri>/tags/emag</uri>
+	<tag>
+		<name>paginator</name>
+		<tagclass>cn.emag.framework.taglib.paginator.PaginatorTag</tagclass>
+		<bodycontent>empty</bodycontent>
+	</tag>
+	
+	<tag>
+		<name>menu</name>
+		<tagclass>cn.emag.framework.taglib.menu.MenuTag</tagclass>
+		<bodycontent>empty</bodycontent>
+	</tag>
+	
+	<tag>
+		<name>tree</name>
+		<tagclass>cn.emag.framework.taglib.tree.TreeTag</tagclass>
+		<bodycontent>empty</bodycontent>
+		<attribute>
+			<name>builder</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>callback</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>parameter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>dynamic</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>checkable</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>radio</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>radioType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!--start  *新分页标签*简化与action耦合*************************************Paginate -->
+	<tag>
+		<name>paginate_new</name>
+		<tagclass>cn.emag.global.tag.PaginateTag</tagclass>
+		<bodycontent>jsp</bodycontent>
+		<info>Display Paginate</info>
+		<attribute>
+			<name>action</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pageNumber</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pageSize</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>total</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>paginate_param</name>
+		<tagclass>cn.emag.global.tag.ParamTag</tagclass>
+		<bodycontent>empty</bodycontent>
+		<info>Display Paginate</info>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!--start  ***************************************Paginate -->
+</taglib>

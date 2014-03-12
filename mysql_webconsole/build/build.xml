@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2011-6-29 下午01:33:16                                                        
+
+     project  edf  
+     description	emag develop framework
+                   
+     Administrator  zhangchao                                                              
+     ====================================================================== -->
+<project name="edf" default="war" basedir=".">
+	<description>
+            edf项目打包
+    </description>
+
+	<property name="src" value="${basedir}/../src" />
+	<property name="WebRoot" value="${basedir}/../WebRoot" />
+	<property name="bin" value="${WebRoot}/WEB-INF/classes" />
+	<property name="classpath" value="${WebRoot}/WEB-INF/lib" />
+	<property name="dist" value="${basedir}/../dist" />
+
+	<!-- define classpath -->
+	<path id="classpath">
+		<fileset dir="${classpath}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- ================================= 
+			  target: init              
+			 ================================= -->
+	<target name="init" description="初始化">
+		<delete dir="${dist}" />
+		<mkdir dir="${dist}" />
+		<delete dir="${bin}" />
+		<mkdir dir="${bin}" />
+	</target>
+
+
+	<!-- ================================= 
+	          target: compile              
+	         ================================= -->
+	<target name="compile" depends="init" description="编译">
+		<javac srcdir="${src}" excludes="EDF.java" destdir="${bin}" debug="on" deprecation="on" encoding="utf-8">
+			<classpath refid="classpath" />
+		</javac>
+		<copy todir="${bin}" encoding="utf-8">
+			<fileset dir="${src}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ================================= 
+	          target: war              
+	         ================================= -->
+	<target name="war" depends="compile" description="打包">
+		<war warfile="${dist}/edf.war" webxml="${WebRoot}/WEB-INF/web.xml">
+			<fileset dir="${WebRoot}">
+				<include name="**/*" />
+				<include name="WEB-INF/**/*" />
+				<include name="WEB-INF/classes/**/*" />
+				<exclude name="WEB-INF/web.xml" />
+				<exclude name="WEB-INF/lib/jsp-api.jar" />
+				<exclude name="WEB-INF/lib/servlet-api.jar" />
+			</fileset>
+		</war>
+	</target>
+</project>

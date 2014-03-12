@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.TcamsGroup" class="com.emag.rao.model.TcamsGroup">
+        <result property="groupId" column="GROUP_ID"/>
+        <result property="groupName" column="GROUP_NAME"/>
+        <result property="groupDesc" column="GROUP_DESC"/>
+        <result property="parentGroupId" column="PARENT_GROUP_ID"/>
+        <result property="levelId" column="LEVEL_ID"/>
+        <result property="groupType" column="GROUP_TYPE"/>
+        <result property="systemId" column="SYSTEM_ID"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="TcamsGroup.columns">
+	    <![CDATA[
+        GROUP_ID ,GROUP_NAME ,GROUP_DESC ,PARENT_GROUP_ID ,LEVEL_ID ,GROUP_TYPE ,SYSTEM_ID 
+	    ]]>
+	</sql>
+	
+    <insert id="TcamsGroup.insert" >
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+        <selectKey resultClass="java.lang.Long" type="pre" keyProperty="groupId" >
+            SELECT  T_CAMS_GROUP_SEQ.nextval AS ID FROM DUAL
+        </selectKey>
+        INSERT INTO T_CAMS_GROUP (
+	        GROUP_ID
+        	<isNotNull prepend="," property="groupName">GROUP_NAME</isNotNull>
+        	<isNotNull prepend="," property="groupDesc">GROUP_DESC</isNotNull>
+        	<isNotNull prepend="," property="parentGroupId">PARENT_GROUP_ID</isNotNull>
+        	<isNotNull prepend="," property="levelId">LEVEL_ID</isNotNull>
+        	<isNotNull prepend="," property="groupType">GROUP_TYPE</isNotNull>
+        	<isNotNull prepend="," property="systemId">SYSTEM_ID</isNotNull>
+        ) VALUES (
+	        #groupId#
+        	<isNotNull prepend="," property="groupName">#groupName#</isNotNull>
+        	<isNotNull prepend="," property="groupDesc">#groupDesc#</isNotNull>
+        	<isNotNull prepend="," property="parentGroupId">#parentGroupId#</isNotNull>
+        	<isNotNull prepend="," property="levelId">#levelId#</isNotNull>
+        	<isNotNull prepend="," property="groupType">#groupType#</isNotNull>
+        	<isNotNull prepend="," property="systemId">#systemId#</isNotNull>
+        )
+    </insert>
+
+    <update id="TcamsGroup.update" >
+        UPDATE T_CAMS_GROUP SET
+	        GROUP_ID = GROUP_ID
+	        <isNotNull prepend="," property="groupName">GROUP_NAME = #groupName#</isNotNull>
+	        <isNotNull prepend="," property="groupDesc">GROUP_DESC = #groupDesc#</isNotNull>
+	        <isNotNull prepend="," property="parentGroupId">PARENT_GROUP_ID = #parentGroupId#</isNotNull>
+	        <isNotNull prepend="," property="levelId">LEVEL_ID = #levelId#</isNotNull>
+	        <isNotNull prepend="," property="groupType">GROUP_TYPE = #groupType#</isNotNull>
+	        <isNotNull prepend="," property="systemId">SYSTEM_ID = #systemId#</isNotNull>
+        WHERE 
+    <![CDATA[
+	        GROUP_ID = #groupId# 
+    ]]>
+    </update>
+
+    <delete id="TcamsGroup.delete">
+    <![CDATA[
+        DELETE FROM T_CAMS_GROUP WHERE
+        GROUP_ID = #groupId# 
+    ]]>
+    </delete>
+    
+    <select id="TcamsGroup.getById" resultMap="RM.TcamsGroup">
+	    SELECT <include refid="TcamsGroup.columns"/>
+	    <![CDATA[
+	        FROM T_CAMS_GROUP 
+	        WHERE 
+		        GROUP_ID = #groupId# 
+	    ]]>
+    </select>
+
+	<sql id="TcamsGroup.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="groupId">
+		             GROUP_ID = #groupId#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="groupName">
+		             GROUP_NAME = #groupName#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="groupDesc">
+		             GROUP_DESC = #groupDesc#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="parentGroupId">
+		             PARENT_GROUP_ID = #parentGroupId#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="levelId">
+		             LEVEL_ID = #levelId#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="groupType">
+		             GROUP_TYPE = #groupType#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="systemId">
+		             SYSTEM_ID = #systemId#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="TcamsGroup.findPage.count" resultClass="long">
+        SELECT count(*) FROM T_CAMS_GROUP <include refid="TcamsGroup.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="TcamsGroup.findPage" resultMap="RM.TcamsGroup">
+    	SELECT <include refid="TcamsGroup.columns"/> FROM T_CAMS_GROUP 
+		<include refid="TcamsGroup.findPage.where"/>
+		<isNotEmpty property="sortColumns">
+			ORDER BY $sortColumns$
+		</isNotEmpty>
+    </select>
+
+	
+</sqlMap>
+
