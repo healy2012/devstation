@@ -6,6 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/java_src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/generator/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/rapid_generator"/>
+        <wb-resource deploy-path="/" source-path="/admin"/>
         <property name="java-output-path" value="/edf_autocrud/web/WEB-INF/classes"/>
         <property name="context-root" value="edf_autocrud"/>
     </wb-module>
