@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>dropshadow.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,27 @@
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\gen\org\qtproject\example\androidexam2\R.java \
+ : G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\drawable-hdpi\icon.png \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\drawable-ldpi\icon.png \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\drawable-mdpi\icon.png \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\layout\splash.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values\libs.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-de\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-el\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-es\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-et\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-fa\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-fr\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-id\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-it\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-ja\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-ms\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-nb\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-nl\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-pl\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-pt-rBR\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-ro\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-rs\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-ru\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-zh-rCN\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\res\values-zh-rTW\strings.xml \
+G:\GitHub\devstation\QtProject\build-androidexam2-Android_for_armeabi_GCC_4_8_Qt_5_3_2-Release\android-build\bin\AndroidManifest.xml \

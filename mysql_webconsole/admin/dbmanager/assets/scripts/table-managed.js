@@ -31,7 +31,8 @@ var TableManaged = function () {
                     "oPaginate": {
                         "sPrevious": "Prev",
                         "sNext": "Next"
-                    }
+                    },
+					"sSearch": "Search all columns:"
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
